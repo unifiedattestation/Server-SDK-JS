@@ -3,7 +3,7 @@
 ## Functions
 - `getBackendInfo(baseUrl)`
 - `decodeToken({ baseUrl, apiSecret, projectId, token, expectedRequestHash })`
-- `isBackendTrusted(backendId, trustedBackends)`
+- `getTrustedBackends(baseUrl)`
 
 ## Build
 ```bash

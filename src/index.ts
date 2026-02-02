@@ -49,8 +49,13 @@ export async function decodeToken(params: {
   return JSON.parse(raw) as DecodeTokenResponse;
 }
 
-export function isBackendTrusted(backendId: string, trustedBackends: string[]): boolean {
-  return trustedBackends.includes(backendId);
+export async function getTrustedBackends(baseUrl: string): Promise<string[]> {
+  const res = await fetch(normalize(baseUrl) + "/api/v1/info/trusted-backends");
+  if (!res.ok) {
+    throw new Error(`Trusted backends failed: ${res.status}`);
+  }
+  const data = (await res.json()) as { backendIds?: string[] };
+  return data.backendIds || [];
 }
 
 function normalize(baseUrl: string): string {
